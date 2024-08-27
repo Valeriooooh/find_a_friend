@@ -1,0 +1,21 @@
+syntax = "proto3";
+package basic;
+
+
+// [RINF:DART-SIGNAL]
+message DocumentListRequest{
+}
+
+// [RINF:DART-SIGNAL]
+message DocumentCreateRequest{
+}
+
+// [RINF:RUST-SIGNAL]
+message DocumentCreateResponse{
+  optional string ticket = 1;
+}
+
+// [RINF:RUST-SIGNAL]
+message DocumentListResponse{
+  repeated string document = 1;
+}
