@@ -13,7 +13,7 @@ crate-type = ["lib", "cdylib", "staticlib"]
 
 [dependencies]
 rinf = "6.15.0"
-prost = "0.12.6"
+prost = "*"
 tokio = { version = "*", features = ["full","tracing", "mio"] }
 iroh = "*"
 futures="*"
