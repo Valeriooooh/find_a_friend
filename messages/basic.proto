@@ -17,5 +17,19 @@ message DocumentCreateResponse{
 
 // [RINF:RUST-SIGNAL]
 message DocumentListResponse{
-  repeated string document = 1;
+  message DocPair{
+    string document = 1;
+    optional string doc_name = 2;
+  }
+  repeated DocPair document = 1;
+}
+
+// [RINF:DART-SIGNAL]
+message DocumentTicketRequest{
+  string documentId = 1;
+}
+
+// [RINF:RUST-SIGNAL]
+message DocumentTicketResponse{
+  string ticket = 1;
 }

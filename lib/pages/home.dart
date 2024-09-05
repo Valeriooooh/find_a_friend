@@ -1,11 +1,19 @@
 import 'package:find_a_friend/messages/basic.pb.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final String title = "Find-A-Friend";
 
   Iterable<ListTile> _listTiles = [];
+
   void _addNewItem() {
     DocumentCreateRequest().sendSignalToRust();
     var _ = StreamBuilder(
@@ -17,6 +25,7 @@ class Home extends StatelessWidget {
           }
           return Text(rustSignal.message.ticket);
         });
+    setState(() {});
   }
 
   @override
@@ -40,8 +49,10 @@ class Home extends StatelessWidget {
                       ListTile(
                           leading:
                               const Icon(color: Colors.lightBlue, Icons.radar),
-                          title: Text(e),
-                          onTap: () {}, //opens with goRouter to file
+                          title: Text((e.docName == "")?"No Party Name": e.docName ),
+                          onTap: () {
+                            context.push("/party/${e.document.toString()}");
+                          }, //opens with goRouter to file
                           onLongPress: () {} // should show a delete screen
                           )
                     })
@@ -53,6 +64,7 @@ class Home extends StatelessWidget {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: _addNewItem,
+        child: const Icon(Icons.add),
       ),
     );
   }
